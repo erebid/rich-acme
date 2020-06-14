@@ -23,7 +23,7 @@ func main() {
 	focusCh := make(chan int)
 	go updateFocus(focusCh, l)
 	ticker := time.NewTicker(15 * time.Second)
-	var focused int
+	focused := 1
 	for {
 		select {
 		case <-ticker.C:
@@ -31,8 +31,7 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			}
-		case f := <-focusCh:
-			focused = f
+		case focused = <-focusCh:
 		}
 	}
 }
